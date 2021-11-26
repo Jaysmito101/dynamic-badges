@@ -25,7 +25,7 @@ Parameters :
 
 # Animated SVG Text
 
-![](https://dynamic-badges.maxalpha.repl.co/animated-svg?text=I%20AM%20Jaysmito&duration=3&color=%237d403c)
+![](https://dynamic-badges.maxalpha.repl.co/animated-svg?text=Dynamic-Badges&duration=3&color=%237d403c)
 
 How to use:
 
