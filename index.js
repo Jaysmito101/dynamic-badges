@@ -58,7 +58,43 @@ app.get('/views', (req, res) => {
 
     });
   });
-})
+});
+
+app.get('/animated-svg', (req, res) => {
+  res.set({
+  'Content-Type': 'image/svg+xml'
+});
+var duration = 5;
+if(req.query.duration)
+  duration = req.query.duration;
+var color = "#9e4a44";
+if(req.query.color)
+  color = req.query.color;
+var text = "Dynamic Badges/SVG Animated Text";
+if(req.query.text)
+  text = req.query.text;
+var repeatCount = "indefinite";
+if(req.query.repeatCount)
+  repeatCount = req.query.repeatCount;
+var font = "Montserrat";
+if(req.query.font)
+  font = req.query.font;
+var fontSize = 26;
+if(req.query.fontSize)
+  fontSize = req.query.fontSize;
+  res.send(
+    `
+    <svg width="100%" height="100%" viewBox="30 -50 600 500" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1">
+ <path id="path">
+		<animate attributeName="d" from="m0,110 h0" to="m0,110 h1100" dur="${duration}s" begin="0s" repeatCount="${repeatCount}"/>
+	</path>
+	<text font-size="${fontSize}" font-family="${font}" fill='${color}'>
+		<textPath xlink:href="#path">${text}</textPath>
+	</text>
+</svg>
+`
+  );
+});
 
 app.get('/*', (req, res) => {
   res.redirect("https://github.com/Jaysmito101/dynamic-badges");

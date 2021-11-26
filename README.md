@@ -9,3 +9,21 @@ This is a view counter badge!
 How to use:
 
     ![Views](https://dynamic-badges.maxalpha.repl.co/views?id=Username.PageID&style=for-the-badge&color=yellow)
+
+# Animated SVG Text
+
+![](https://dynamic-badges.maxalpha.repl.co/animated-svg?text=I%20AM%20Jaysmito&duration=3&color=%237d403c)
+
+How to use:
+
+    ![](https://dynamic-badges.maxalpha.repl.co/animated-svg?text=I%20AM%20Jaysmito&duration=3&color=%237d403c)
+
+Parameters : 
+
+    duration
+    font
+    fontSize
+    repeatCount
+    color
+    text
+    
