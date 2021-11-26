@@ -1,6 +1,10 @@
 # Dynamic Badges
 A bunch of dynamic cool badges for your GitHub profile and Readmes!
 
+# Suggest A Badge
+
+[Suggest](https://github.com/Jaysmito101/dynamic-badges/issues/new/choose)
+
 # View Badge
 This is a view counter badge!
 
