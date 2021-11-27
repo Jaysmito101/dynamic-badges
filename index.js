@@ -36,10 +36,12 @@ app.get('/views', (req, res) => {
         col = req.query.color;
       if (req.query.font)
         st = req.query.font;
+      var expiryDate = new Date(Number(new Date()) - 100000);
 
       res.set({
         'Content-Type': 'image/svg+xml',
-        'Cache-Control': 'no-store',
+        'Cache-Control': 'no-cache,max-age=0,no-store,s-maxage=0,proxy-revalidate',
+        'Expires': expiryDate,
         'etag': false
       });
       res.send(
@@ -163,15 +165,17 @@ app.get('/age/:dd/:mm/:yyyy', (req, res) => {
   const days = rawDays % 30;
   const months = rawMonths % 12;
   const years = rawYears;
-  var txt =  `${years} years, ${months} months, ${days} days`;
- res.set({
-        'Content-Type': 'image/svg+xml',
-        'Cache-Control': 'no-store',
-        'etag': false
-      });
+  var expiryDate = new Date(Number(new Date()) - 100000);
+  var txt = `${years} years, ${months} months, ${days} days`;
+  res.set({
+    'Content-Type': 'image/svg+xml',
+    'Cache-Control': 'no-cache,max-age=0,no-store,s-maxage=0,proxy-revalidate',
+    'Expires': expiryDate,
+    'etag': false
+  });
 
-      res.send(
-`
+  res.send(
+    `
 <svg height="40" width="350" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1">
     <a href="https://github.com/Jaysmito101/dynamic-badges">
 	<rect width="70" height="50" style="fill:rgba(60, 60, 60);" />
@@ -182,7 +186,7 @@ app.get('/age/:dd/:mm/:yyyy', (req, res) => {
   </a>
 </svg>
 `
-      );
+  );
 
 });
 
