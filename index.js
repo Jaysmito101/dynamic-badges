@@ -8,10 +8,10 @@ const db = new Database()
 
 app.get('/api/views', (req, res) => {
   var key = "views-data";
-  
-db.get(key).then(value => {
-  res.send(value);
-});
+
+  db.get(key).then(value => {
+    res.send(value);
+  });
 });
 
 app.get('/views', (req, res) => {
@@ -122,6 +122,9 @@ app.get('/api/age/:dd/:mm/:yyyy/:color/:style', (req, res) => {
     col = req.params.color;
   if (req.params.style)
     st = req.params.style;
+  var font = "Montserrat";
+  if (req.query.font)
+    font = req.query.font;
 
   var output = {
     "schemaVersion": 1,
@@ -134,13 +137,52 @@ app.get('/api/age/:dd/:mm/:yyyy/:color/:style', (req, res) => {
 });
 
 app.get('/age/:dd/:mm/:yyyy', (req, res) => {
+  var day = req.params.dd;
+  var month = req.params.mm;
+  var year = req.params.yyyy;
   var col = "green";
   var st = "for-the-badge";
   if (req.query.color)
     col = req.query.color;
+  var fn = "Montserrat";
+  if (req.query.font)
+    fn = req.query.font;
   if (req.query.style)
     st = req.query.style;
-  res.redirect("https://img.shields.io/endpoint?url=" + encodeURIComponent(`https://dynamic-badges.maxalpha.repl.co/api/age/${req.params.dd}/${req.params.mm}/${req.params.yyyy}/${col}/${st}`));
+  const rawMiliseconds = new Date() - new Date(`${day}/${month}/${year}`);
+  const rawSeconds = Math.floor(rawMiliseconds / 1000);
+  const rawMinutes = Math.floor(rawSeconds / 60);
+  const rawHours = Math.floor(rawMinutes / 60);
+  const rawDays = Math.floor(rawHours / 24);
+  const rawMonths = Math.floor(rawDays / 30);
+  const rawYears = Math.floor(rawDays / 365);
+
+  const seconds = rawSeconds % 60;
+  const minutes = rawMinutes % 60;
+  const hours = rawHours % 24;
+  const days = rawDays % 30;
+  const months = rawMonths % 12;
+  const years = rawYears;
+  var txt =  `${years} years, ${months} months, ${days} days`;
+ res.set({
+        'Content-Type': 'image/svg+xml',
+        'Cache-Control': 'no-store',
+        'etag': false
+      });
+
+      res.send(
+`
+<svg height="40" width="350" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1">
+    <a href="https://github.com/Jaysmito101/dynamic-badges">
+	<rect width="70" height="50" style="fill:rgba(60, 60, 60);" />
+    <rect width="280" height="50" style="fill:${col};" transform="translate(70 0)" />
+	 <text y="55%" x="5%"  font-family="${fn}" dominant-baseline="middle" fill="#fff">Age</text>
+     <text y="55%" x="30%" font-family="${fn}" dominant-baseline="middle" fill="#fff">${txt}</text>
+  Sorry, your browser does not support inline SVG.
+  </a>
+</svg>
+`
+      );
 
 });
 
