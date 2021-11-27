@@ -6,55 +6,55 @@ const Database = require("@replit/database");
 const db = new Database()
 
 
-
 app.get('/api/views', (req, res) => {
-  var key = "view-" + encodeURIComponent(req.query.id);
-  db.get(key).then(value => {
-    var val = 0;
-    if (value != undefined && value != null) {
-      val = value;
-    }
-    var col = "green";
-    var st = "for-the-badge";
-    if (req.query.color)
-      col = req.query.color;
-    if (req.query.style)
-      st = req.query.style;
-
-
-    var output = {
-      "schemaVersion": 1,
-      "label": "Views",
-      "message": `${val}`,
-      "color": col,
-      "style": st,
-      "cacheSeconds": 1
-    };
-    res.json(output);
-  });
+  var key = "views-data";
+  
+db.get(key).then(value => {
+  res.send(value);
+});
 });
 
 app.get('/views', (req, res) => {
 
-  var key = "view-" + encodeURIComponent(req.query.id);
+  var key = "views-data"
   db.get(key).then(value => {
     var val = 0;
-    if (value == undefined || value == null) {
-      db.set(key, 0).then(() => { });
+    if (value[encodeURIComponent(req.query.id)] == undefined) {
+      value[encodeURIComponent(req.query.id)] = 0;
+      db.set(key, value).then(() => { });
     }
     else {
-      val = value + 1;
+      val = value[encodeURIComponent(req.query.id)] + 1;
+      value[encodeURIComponent(req.query.id)] = val;
     }
 
-    db.set(key, val).then(() => {
-      var col = "green";
+    db.set(key, value).then(() => {
+      var col = "rgb(60, 200, 60)";
+      var fn = "Roboto";
       var st = "for-the-badge";
       if (req.query.color)
         col = req.query.color;
-      if (req.query.style)
-        st = req.query.style;
+      if (req.query.font)
+        st = req.query.font;
 
-      res.redirect("https://img.shields.io/endpoint?url=" + encodeURIComponent(`https://dynamic-badges.maxalpha.repl.co/api/views?id=${req.query.id}&color=${col}&style=${st}`));
+      res.set({
+        'Content-Type': 'image/svg+xml',
+        'Cache-Control': 'no-store',
+        'etag': false
+      });
+      res.send(
+        `
+        <svg height="40" width="170" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1">
+    <a href="https://github.com/Jaysmito101/dynamic-badges">
+	<rect width="100" height="50" style="fill:rgba(60, 60, 60);" />
+    <rect width="70" height="50" style="fill:${col};" transform="translate(100 0)" />
+	 <text y="55%" x="10%"  font-family="${fn}" dominant-baseline="middle" fill="#fff">Views</text>
+     <text y="55%" x="65%" font-family="${fn}" dominant-baseline="middle" fill="#fff">${val}</text>
+  Sorry, your browser does not support inline SVG.
+  </a>
+</svg>
+        `
+      );
 
     });
   });
@@ -85,12 +85,14 @@ app.get('/animated-svg', (req, res) => {
   res.send(
     `
     <svg width="100%" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1">
+    <a href="https://github.com/Jaysmito101/dynamic-badges">
  <path id="path">
 		<animate attributeName="d" from="m0,110 h0" to="m0,110 h1100" dur="${duration}s" begin="0s" repeatCount="${repeatCount}"/>
 	</path>
 	<text font-size="${fontSize}" font-family="${font}" fill='${color}'>
 		<textPath xlink:href="#path">${text}</textPath>
 	</text>
+  </a>
 </svg>
 `
   );
@@ -139,7 +141,7 @@ app.get('/age/:dd/:mm/:yyyy', (req, res) => {
   if (req.query.style)
     st = req.query.style;
   res.redirect("https://img.shields.io/endpoint?url=" + encodeURIComponent(`https://dynamic-badges.maxalpha.repl.co/api/age/${req.params.dd}/${req.params.mm}/${req.params.yyyy}/${col}/${st}`));
-  
+
 });
 
 app.get('/*', (req, res) => {
