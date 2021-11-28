@@ -49,6 +49,16 @@ How to use:
 
     ![Views](https://dynamic-badges.maxalpha.repl.co/views?id=Username.RepositoryName&style=for-the-badge&color=blue)
 
+# Github Trophy
+
+![Trophy](https://dynamic-badges.maxalpha.repl.co/score/Jaysmito101)
+
+How to use:
+
+    ![Trophy](https://dynamic-badges.maxalpha.repl.co/score/Jaysmito101)
+
+The score is calculated based on youe github profile!
+
 # Age Badge
 
 ![Age](https://dynamic-badges.maxalpha.repl.co/age/12/08/2004)
