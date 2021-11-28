@@ -5,6 +5,39 @@ A bunch of dynamic cool badges for your GitHub profile and Readmes!
 
 [Suggest](https://github.com/Jaysmito101/dynamic-badges/issues/new/choose)
 
+# Star Rating Widget
+
+The Rating Input:
+
+ <a href="https://dynamic-badges.maxalpha.repl.co/star?user=Jaysmito101&repo=dynamic-badges&id=1"><img src="https://dynamic-badges.maxalpha.repl.co/star?image=true"></a>
+ <a href="https://dynamic-badges.maxalpha.repl.co/star?user=Jaysmito101&repo=dynamic-badges&id=2"><img src="https://dynamic-badges.maxalpha.repl.co/star?image=true"></a>
+ <a href="https://dynamic-badges.maxalpha.repl.co/star?user=Jaysmito101&repo=dynamic-badges&id=3"><img src="https://dynamic-badges.maxalpha.repl.co/star?image=true"></a>
+ <a href="https://dynamic-badges.maxalpha.repl.co/star?user=Jaysmito101&repo=dynamic-badges&id=4"><img src="https://dynamic-badges.maxalpha.repl.co/star?image=true"></a>
+ <a href="https://dynamic-badges.maxalpha.repl.co/star?user=Jaysmito101&repo=dynamic-badges&id=5"><img src="https://dynamic-badges.maxalpha.repl.co/star?image=true"></a>
+
+The Rating Display:
+
+ <a href="https://github.com/Jaysmito101/dynamic-badges/"><img src="https://dynamic-badges.maxalpha.repl.co/star?user=Jaysmito101&repo=dynamic-badges&show=true"><img src="https://dynamic-badges.maxalpha.repl.co/star?image=true"></a>
+ 
+How to use:
+
+The Rating Input:
+
+    <a href="https://dynamic-badges.maxalpha.repl.co/star?user=Jaysmito101&repo=dynamic-badges&id=1"><img src="https://dynamic-badges.maxalpha.repl.co/star?image=true"></a>
+    <a href="https://dynamic-badges.maxalpha.repl.co/star?user=Jaysmito101&repo=dynamic-badges&id=2"><img src="https://dynamic-badges.maxalpha.repl.co/star?image=true"></a>
+    <a href="https://dynamic-badges.maxalpha.repl.co/star?user=Jaysmito101&repo=dynamic-badges&id=3"><img src="https://dynamic-badges.maxalpha.repl.co/star?image=true"></a>
+    <a href="https://dynamic-badges.maxalpha.repl.co/star?user=Jaysmito101&repo=dynamic-badges&id=4"><img src="https://dynamic-badges.maxalpha.repl.co/star?image=true"></a>
+    <a href="https://dynamic-badges.maxalpha.repl.co/star?user=Jaysmito101&repo=dynamic-badges&id=5"><img src="https://dynamic-badges.maxalpha.repl.co/star?image=true"></a>
+ 
+ The Rating Display:
+ 
+    <a href="https://github.com/Jaysmito101/dynamic-badges/"><img src="https://dynamic-badges.maxalpha.repl.co/star?user=Jaysmito101&repo=dynamic-badges&show=true"><img src="https://dynamic-badges.maxalpha.repl.co/star?image=true"></a>
+ 
+
+How it works:
+
+Each star is a link which collects the rating. Also 1 person can rate only once in 1 hour to prevent spam.
+
 # View Badge
 This is a view counter badge!
 
