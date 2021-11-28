@@ -1,8 +1,10 @@
 const express = require("express");
+const cookieParser = require("cookie-parser");
+const path = require("path");
 const app = express();
 const Database = require("@replit/database");
 
-
+app.use(cookieParser());
 const db = new Database()
 
 
@@ -188,6 +190,85 @@ app.get('/age/:dd/:mm/:yyyy', (req, res) => {
 `
   );
 
+});
+
+app.get('/api/star', (req, res) => {
+
+  db.get("ratings").then(value => {
+    res.json(value);
+  });
+});
+
+app.get('/star', (req, res) => {
+  if (req.query.image) 
+  {
+    res.sendFile(path.join(__dirname, 'static/star.png'));
+    return;
+  }
+
+  var uname = "Jaysmito101";
+  var repo = "dynamic-badges";
+  var id = 0;
+  if (req.query.id)
+    id = req.query.id;
+  if (req.query.uname)
+    uname = req.query.uname;
+  if (req.query.repo)
+    repo = req.query.repo;
+  var key = encodeURIComponent(uname) + "-" + encodeURIComponent(repo);
+
+  if(req.query.show)
+  {
+    var rat = 0;
+    db.get("ratings").then(value => {
+      if(value[key] != undefined)
+      {
+        rat = value[key].score/value[key].count;
+      }
+      res.set({
+    'Content-Type': 'image/svg+xml',
+    'Cache-Control': 'no-cache,max-age=0,no-store,s-maxage=0,proxy-revalidate',
+    'etag': false
+  });
+      res.send(
+      `
+      <svg 
+    xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="60" height="50">
+	<text y="75%" x="0%" fill="red"
+    font-size="25" font-family="Open Sans">${rat.toFixed(2)} </text>
+</svg>
+      `
+    );
+    });
+    return;
+  }
+
+  if (req.cookies["rated-" + key]) {
+    res.redirect(`https://github.com/${uname}/${repo}`);
+    return;
+  }
+  let options = {
+    maxAge: 1000 * 60 * 30 // would expire after 30 minutes
+  }
+
+
+  db.get("ratings").then(value => {
+    var val = 0;
+    var count = 0;
+    if (value[key] != undefined) {
+      val = value[key].score;
+      count = value[key].count;
+    }
+    else {
+      value[key] = {};
+    }
+    value[key].score = (parseInt(val) + parseInt(id));
+    value[key].count = count + 1;
+    db.set("ratings", value).then(() => {
+      res.cookie('rated-' + key, id, options)
+      res.redirect(`https://github.com/${uname}/${repo}`);
+    });
+  });
 });
 
 app.get('/*', (req, res) => {
