@@ -242,6 +242,8 @@ app.get('/star', (req, res) => {
   }
 
   if (req.cookies["rated-" + key]) {
+    if(req.query.tourl)
+      res.redirect(req.query.tourl);
     res.redirect(`https://github.com/${uname}/${repo}`);
     return;
   }
@@ -263,7 +265,9 @@ app.get('/star', (req, res) => {
     value[key].score = (parseInt(val) + parseInt(id));
     value[key].count = count + 1;
     db.set("ratings", value).then(() => {
-      res.cookie('rated-' + key, id, options)
+      res.cookie('rated-' + key, id, options);
+      if(req.query.tourl)
+        res.redirect(req.query.tourl);
       res.redirect(`https://github.com/${uname}/${repo}`);
     });
   });
