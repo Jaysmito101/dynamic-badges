@@ -37,6 +37,8 @@ The Rating Input:
     <a href="https://github.com/Jaysmito101/dynamic-badges/"><img src="https://dynamic-badges.maxalpha.repl.co/star?user=Jaysmito101&repo=dynamic-badges&show=true"><img src="https://dynamic-badges.maxalpha.repl.co/star?image=true"></a>
  
 
+Optional Parameter : `tourl=http:\\google.com`
+
 How it works:
 
 Each star is a link which collects the rating. Also 1 person can rate only once in 1 hour to prevent spam.
