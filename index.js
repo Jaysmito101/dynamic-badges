@@ -22,18 +22,29 @@ app.get('/meme', (req, res) => {
   var h = "400";
   if (req.query.h)
     h = req.query.h;
+  var expiryDate = new Date(Number(new Date()) - 100000);
+
   res.set({
-    'Content-Type': 'image/svg+xml',
-    'Cache-Control': 'no-cache,max-age=0,no-store,s-maxage=0,proxy-revalidate'
+    'Cache-Control': 'no-cache,max-age=0,no-store,s-maxage=0,proxy-revalidate',
+    'Expires': expiryDate,
+    'etag': false
   });
-  res.send(
+  fetch(memesData.random())
+	.then(response => {
+     const contentType = response.headers.get("content-type");
+      response.buffer().then((buffer) => {
+        res.setHeader("Content-Type", contentType);
+        res.status(200).send(buffer);
+      });
+  });
+  /*res.send(
     `
     <svg width="${w}" height="${h}"
   xmlns="http://www.w3.org/2000/svg">
   <image href="${memesData.random()}" height="${h}" width="${w}"/>
 </svg>
     `
-  );
+  );*/
 });
 
 app.get('/api/views', (req, res) => {
