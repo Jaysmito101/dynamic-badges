@@ -52,6 +52,14 @@ How to use:
 
     ![Views](https://dynamic-badges.maxalpha.repl.co/views?id=Username.RepositoryName&style=for-the-badge&color=blue)
 
+# Random Programming Meme
+
+![Meme](https://dynamic-badges.maxalpha.repl.co/meme?w=400&h=200)
+
+How to use:
+
+    ![Meme](https://dynamic-badges.maxalpha.repl.co/meme?w=400&h=200)
+
 # Github Trophy
 
 ![Trophy](https://dynamic-badges.maxalpha.repl.co/score/Jaysmito101)

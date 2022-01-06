@@ -1,13 +1,40 @@
 const express = require("express");
 const fetch = require('node-fetch');
 const cookieParser = require("cookie-parser");
+const fs = require('fs');
 const path = require("path");
 const app = express();
 const Database = require("@replit/database");
 
 app.use(cookieParser());
-const db = new Database()
+const db = new Database();
 
+Array.prototype.random = function() {
+  return this[Math.floor((Math.random() * this.length))];
+};
+
+const memesData = JSON.parse(fs.readFileSync('./memes.json', 'utf8'));
+
+app.get('/meme', (req, res) => {
+  var w = "400";
+  if (req.query.w)
+    w = req.query.w;
+  var h = "400";
+  if (req.query.h)
+    h = req.query.h;
+  res.set({
+    'Content-Type': 'image/svg+xml',
+    'Cache-Control': 'no-cache,max-age=0,no-store,s-maxage=0,proxy-revalidate'
+  });
+  res.send(
+    `
+    <svg width="${w}" height="${h}"
+  xmlns="http://www.w3.org/2000/svg">
+  <image href="${memesData.random()}" height="${h}" width="${w}"/>
+</svg>
+    `
+  );
+});
 
 app.get('/api/views', (req, res) => {
   var key = "views-data";
@@ -242,7 +269,7 @@ app.get('/star', (req, res) => {
   }
 
   if (req.cookies["rated-" + key]) {
-    if(req.query.tourl)
+    if (req.query.tourl)
       res.redirect(req.query.tourl);
     res.redirect(`https://github.com/${uname}/${repo}`);
     return;
@@ -266,7 +293,7 @@ app.get('/star', (req, res) => {
     value[key].count = count + 1;
     db.set("ratings", value).then(() => {
       res.cookie('rated-' + key, id, options);
-      if(req.query.tourl)
+      if (req.query.tourl)
         res.redirect(req.query.tourl);
       res.redirect(`https://github.com/${uname}/${repo}`);
     });
@@ -355,6 +382,7 @@ function sendScore(res, score) {
             `
   );
 }
+
 
 app.get('/api/score', (req, res) => {
 
