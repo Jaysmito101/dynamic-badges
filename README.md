@@ -36,6 +36,7 @@ The Rating Input:
  
     <a href="https://github.com/Jaysmito101/dynamic-badges/"><img src="https://dynamic-badges.maxalpha.repl.co/star?user=Jaysmito101&repo=dynamic-badges&show=true"><img src="https://dynamic-badges.maxalpha.repl.co/star?image=true"></a>
  
+Optional Parameter : `tourl=http:\\google.com`
 
 How it works:
 
