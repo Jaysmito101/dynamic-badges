@@ -53,11 +53,11 @@ How to use:
 
 # Random Programming Meme
 
-![Meme](https://dynamic-badges.maxalpha.repl.co/meme)
+<img src="https://dynamic-badges.maxalpha.repl.co/meme" width=400 height=300/>
 
 How to use:
 
-    ![Meme](https://dynamic-badges.maxalpha.repl.co/meme?w=400&h=200)
+    <img src="https://dynamic-badges.maxalpha.repl.co/meme" width=400 height=300/>
 
 # Github Trophy
 
