@@ -38,8 +38,6 @@ The Rating Input:
  
 Optional Parameter : `tourl=http:\\google.com`
 
-Optional Parameter : `tourl=http:\\google.com`
-
 How it works:
 
 Each star is a link which collects the rating. Also 1 person can rate only once in 1 hour to prevent spam.
@@ -48,8 +46,6 @@ Each star is a link which collects the rating. Also 1 person can rate only once 
 This is a view counter badge!
 
 ![Views](https://dynamic-badges.maxalpha.repl.co/views?id=Username.PageID&style=for-the-badge&color=blue)
-
-
 
 How to use:
 
