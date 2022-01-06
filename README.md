@@ -53,7 +53,7 @@ How to use:
 
 # Random Programming Meme
 
-![Meme](https://dynamic-badges.maxalpha.repl.co/meme?w=400&h=200)
+![Meme](https://dynamic-badges.maxalpha.repl.co/meme)
 
 How to use:
 
